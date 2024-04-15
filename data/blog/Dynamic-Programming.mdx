@@ -1,0 +1,44 @@
+---
+title: 'What is Dynamic Programming?'
+date: '2024-04-16'
+lastmod: '2024-04-16'
+tags: ['dynamic programming', 'algorithms']
+draft: false
+summary: Dynamic programming is an algorithmic technique that efficiently solves problems by breaking them down into smaller overlapping subproblems and storing the solutions to these subproblems to avoid redundant computations.
+---
+
+Dynamic programming is an optimization technique used for solving complex problems by breaking them down into simpler subproblems. It is used when the problem can be divided into overlapping subproblems, which are then solved just once and stored for future use, usually in an array or hashtable. This method ensures that each subproblem is only solved once, thus reducing the computational burden significantly, especially for problems with a large number of overlapping subproblems and optimal substructure.
+
+Here's how dynamic programming works:
+
+1. **Characterize the Structure of an Optimal Solution**: Identify how an optimal solution can be constructed from optimal solutions to its subproblems.
+
+2. **Recursively Define the Value of an Optimal Solution**: Typically, this step involves creating a function or a mathematical recurrence that relates the value of the solution to a given problem to the solutions of its subproblems.
+
+3. **Compute the Value of an Optimal Solution (Typically Bottom-Up)**: Instead of using a top-down recursive method, dynamic programming fills in a table bottom-up. This is generally more efficient since it avoids the overhead of recursion and ensures that all subproblems are solved before attempting to find the solution to the actual problem.
+
+4. **Construct an Optimal Solution from Computed Information**: Once the table is filled in, the solution to the actual problem is either in the last entry of the table or can be constructed from the entries in the table.
+
+The two main techniques of dynamic programming are:
+
+- **Memoization (Top-Down Approach)**: This approach starts at the top and breaks down the problems into subproblems, as in recursion. However, unlike in recursion, results of the subproblems are stored for future reference. Thus, if the same subproblem appears again, instead of recalculating it, one retrieves the already calculated result, saving computation time.
+
+- **Tabulation (Bottom-Up Approach)**: This approach starts at the bottom and solves the subproblems first with smaller inputs, storing the results in a table. As we move to larger subproblems, we use the results from the smaller subproblems to solve them.
+
+Dynamic programming can only be used when a problem has the following features:
+
+- **Optimal Substructure**: An optimal solution to the problem contains an optimal solution to subproblems.
+
+- **Overlapping Subproblems**: The problem can be broken down into subproblems which are reused several times.
+
+Some classic examples of dynamic programming include:
+
+- **Fibonacci number sequence**: A series of numbers where the next number is found by adding up the two numbers before it. A naive recursive solution would be highly inefficient because it would recompute the same values multiple times, whereas a dynamic programming approach, either through tabulation or memoization, would compute each value only once.
+
+- **Knapsack Problem**: A problem where you have to pack the most valuable items without exceeding the weight capacity of your knapsack.
+
+- **Shortest Path Problems**: Like the Bellman-Ford algorithm, which finds the shortest path in a weighted graph.
+
+- **Coin Change Problem**: Given a set of coin denominations and a target amount, determining the fewest coins needed to make up that amount.
+
+By avoiding redundant calculations and using solutions to subproblems, dynamic programming makes it possible to solve many problems that would otherwise be intractable.

@@ -1,0 +1,32 @@
+---
+title: 'What is Divide and Conquer Algorithm?'
+date: '2024-04-16'
+lastmod: '2024-04-16'
+tags: ['divide and conquer', 'algorithms']
+draft: false
+summary: Divide and conquer is a recursive problem-solving approach that breaks a problem into smaller, more manageable subproblems, solves them individually, and then combines their solutions to solve the original problem.
+---
+
+The "divide and conquer" algorithmic strategy breaks down a problem into smaller subproblems of the same type, solves these subproblems recursively, and then combines the solutions of the subproblems to solve the original problem. This approach is highly effective for a variety of complex computational problems. 
+
+Here's a general outline of the divide and conquer strategy:
+
+1. **Divide**: Break the problem into a number of subproblems that are smaller instances of the same problem.
+
+2. **Conquer**: Solve the subproblems recursively. If they are small enough, solve the subproblems as base cases.
+
+3. **Combine**: Combine the solutions of the subproblems into the solution for the original problem.
+
+Some classic examples of divide and conquer algorithms include:
+
+- **Merge Sort**: An array is divided in half repeatedly until each sub-array has only one element. Then, adjacent sub-arrays are merged in a sorted order to produce sorted sub-arrays, which are in turn merged until a single sorted array is produced.
+
+- **Quick Sort**: In this sorting algorithm, an element known as a pivot is selected. Other elements are partitioned into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively.
+
+- **Binary Search**: This search algorithm repeatedly divides a sorted array in half, discarding the half that is sure not to contain the item being looked for, until the possible locations have been reduced to just one.
+
+- **Strassen’s Algorithm**: This is an algorithm that multiplies two matrices faster than the standard matrix multiplication technique, by breaking them into smaller matrices, performing fewer recursive multiplications, and then recombining them.
+
+- **Karatsuba Algorithm for Multiplication**: This is a recursive algorithm to multiply two integers, based on the principle that two large integers can be split into smaller numbers, which are then processed and recombined.
+
+Divide and conquer is both a recursive and an algorithmic design pattern, and it's used not just in algorithms that process data (like sorting or searching), but also in algorithms that optimize certain processes or solve mathematical problems.

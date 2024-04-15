@@ -2,8 +2,8 @@
 "dfs":2, 
 "graph":1, 
 "geeksforgeeks":2, 
-"dynamic programming":4, 
-"algorithms":1, 
+"dynamic programming":5, 
+"algorithms":3, 
 "array":8, 
 "queue":1, 
 "leetcode":9, 
@@ -15,5 +15,5 @@
 "hash table":2,
 "sorting":1,
 "prefix sum":1,
-"divide and conquer":1
+"divide and conquer":2
 }
