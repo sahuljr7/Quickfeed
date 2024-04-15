@@ -1,0 +1,85 @@
+---
+title: 'Best Time to Buy and Sell Stock'
+date: '2024-04-16'
+lastmod: '2024-04-16'
+tags: ['array', 'dynamic programming', 'leetcode']
+draft: false
+summary: You are given an array prices where prices[i] is the price of a given stock on the ith day. You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
+
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
+
+## Solution
+
+```cpp
+class Solution {
+public:
+  int maxProfit(int k, vector<int>& prices) {
+    // If k is greater than or equal to half the size of prices vector
+    if (k >= prices.size() / 2) {
+      // Initialize variables for selling and holding
+      int sell = 0;
+      int hold = INT_MIN;
+
+      // Iterate through each price
+      for (const int price : prices) {
+        // Update sell with the maximum value between current sell and hold + price
+        sell = max(sell, hold + price);
+        // Update hold with the maximum value between current hold and sell - price
+        hold = max(hold, sell - price);
+      }
+
+      // Return the final sell value
+      return sell;
+    }
+
+    // If k is less than half the size of prices vector
+    // Initialize vectors to store sell and hold values for each transaction count
+    vector<int> sell(k + 1);
+    vector<int> hold(k + 1, INT_MIN);
+
+    // Iterate through each price
+    for (const int price : prices)
+      // Iterate from k to 1 to update sell and hold values
+      for (int i = k; i > 0; --i) {
+        // Update sell[i] with the maximum value between current sell[i] and hold[i] + price
+        sell[i] = max(sell[i], hold[i] + price);
+        // Update hold[i] with the maximum value between current hold[i] and sell[i-1] - price
+        hold[i] = max(hold[i], sell[i - 1] - price);
+      }
+
+    // Return the maximum profit for k transactions
+    return sell[k];
+  }
+};
+```
+
+### Algorithm steps:
+1. If the value of k is greater than or equal to half the size of the prices vector, it means we can make transactions as many times as we want. In this case, we use a simpler approach to calculate the maximum profit.
+   - Initialize `sell` to store the maximum profit we can achieve by selling, and `hold` to store the maximum profit we can achieve by holding a stock.
+   - Iterate through each price:
+     - Update `sell` with the maximum value between the current `sell` and `hold + price`.
+     - Update `hold` with the maximum value between the current `hold` and `sell - price`.
+   - Return the final `sell` value.
+
+2. If k is less than half the size of the prices vector, meaning we have a restriction on the number of transactions we can make, we use dynamic programming to calculate the maximum profit.
+   - Initialize vectors `sell` and `hold` to store the maximum profit for each transaction count.
+   - Iterate through each price and each possible transaction count from k down to 1:
+     - Update `sell[i]` with the maximum value between the current `sell[i]` and `hold[i] + price`.
+     - Update `hold[i]` with the maximum value between the current `hold[i]` and `sell[i - 1] - price`.
+   - Return the maximum profit for k transactions, which is stored in `sell[k]`.
+
+### Time complexity:
+- The time complexity of this code is O(n * k), where n is the size of the prices vector and k is the given value. This is because we have two nested loops iterating over the prices vector and a range of transactions.
+
+### Space complexity:
+- The space complexity of this code is O(k), as we are using two vectors of size k to store the sell and hold values.
+
+Complexity cannot be significantly reduced in this case, as we need to consider each transaction and each price to compute the maximum profit.

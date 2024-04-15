@@ -1,0 +1,62 @@
+---
+title: 'Two Sum'
+date: '2024-04-16'
+lastmod: '2024-04-16'
+tags: ['array', 'hash table', 'leetcode']
+draft: false
+summary: Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/two-sum/description/)
+
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+You can return the answer in any order.
+
+## Solution
+
+```cpp
+class Solution {
+public:
+  vector<int> twoSum(vector<int>& nums, int target) {
+    // Create an unordered map to store the mapping from number to its index
+    unordered_map<int, int> numToIndex;
+
+    // Iterate through each element in nums
+    for (int i = 0; i < nums.size(); ++i) {
+      // Check if the complement (target - nums[i]) exists in the map
+      if (const auto it = numToIndex.find(target - nums[i]); it != numToIndex.cend())
+        // If found, return the indices of the two numbers that sum up to the target
+        return {it->second, i};
+      // If not found, store the current number along with its index in the map
+      numToIndex[nums[i]] = i;
+    }
+
+    // If no solution is found, throw an exception
+    throw;
+  }
+};
+```
+
+### Algorithm steps:
+1. Create an unordered map `numToIndex` to store the mapping from number to its index.
+2. Iterate through each element in the `nums` vector.
+3. For each element `nums[i]`, calculate the complement (`target - nums[i]`).
+4. Check if the complement exists in the `numToIndex` map.
+5. If found, return the indices of the two numbers (`it->second` and `i`) that sum up to the target.
+6. If not found, store the current number `nums[i]` along with its index `i` in the `numToIndex` map.
+7. If no solution is found after iterating through all elements, throw an exception.
+
+### Time complexity:
+- The time complexity of this code is O(n), where n is the number of elements in the `nums` vector. This is because we iterate through the `nums` vector once, and for each element, the average time complexity of unordered map operations (insertion and search) is O(1).
+
+### Space complexity:
+- The space complexity is O(n) in the worst case. This is because, in the worst case, we may need to store all elements of `nums` in the `numToIndex` map.
+
+The complexity cannot be significantly reduced as finding the two numbers with a specific sum generally requires examining each element at least once.
+
+
+

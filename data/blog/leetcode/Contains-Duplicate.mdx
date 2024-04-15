@@ -1,0 +1,49 @@
+---
+title: 'Contains Duplicate'
+date: '2024-04-16'
+lastmod: '2024-04-16'
+tags: ['array', 'hash table', 'sorting', 'leetcode']
+draft: false
+summary: Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/contains-duplicate/description/)
+
+Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+## Solution
+
+```cpp
+class Solution {
+public:
+  bool containsDuplicate(vector<int>& nums) {
+    // Initialize an unordered set to store seen numbers
+    unordered_set<int> seen;
+
+    // Iterate through each element in the nums vector
+    for (const int num : nums)
+      // If inserting the current element into the set fails (i.e., it's already present), return true
+      if (!seen.insert(num).second)
+        return true;
+
+    // If no duplicate is found, return false
+    return false;
+  }
+};
+```
+
+### Algorithm steps:
+1. Initialize an unordered set named `seen` to store the numbers encountered so far.
+2. Iterate through each element `num` in the `nums` vector.
+3. Attempt to insert `num` into the `seen` set. If insertion fails (i.e., `insert` returns false because the element is already present), return true, indicating that a duplicate has been found.
+4. If no duplicates are found after iterating through all elements, return false.
+
+### Time complexity:
+- The time complexity of this code is O(n), where n is the number of elements in the `nums` vector. This is because we iterate through each element once and each insertion or search operation in an unordered set takes O(1) average time complexity.
+
+### Space complexity:
+- The space complexity is also O(n) in the worst case. This is because, in the worst case, all elements of `nums` are stored in the `seen` set.
+
+This code efficiently determines whether the input vector contains any duplicates. There's no significant reduction possible for time or space complexity in this scenario, as checking each element once is necessary to detect duplicates.
+

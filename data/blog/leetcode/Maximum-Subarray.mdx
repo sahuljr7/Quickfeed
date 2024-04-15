@@ -1,0 +1,72 @@
+---
+title: 'Maximum Subarray'
+date: '2024-04-16'
+lastmod: '2024-04-16'
+tags: ['array', 'divide and conquer', 'dynamic programming','leetcode']
+draft: false
+summary: Given an integer array nums, find the subarray with the largest sum, and return its sum.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/maximum-subarray/description/)
+
+Given an integer array nums, find the subarray with the largest sum, and return its sum.
+
+<TOCInline toc={props.toc} exclude="Problem Statement" />
+
+
+## Solution
+This code is a concise implementation of the Kadane's algorithm for finding the maximum subarray sum.
+
+```cpp
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int max_sum = INT_MIN;  // Initialize the maximum sum to the smallest possible integer value.
+        int cur = 0;            // Initialize the current sum to 0.
+
+        // Iterate through each element in nums.
+        for(auto x: nums) {
+            if(cur < 0) 
+                cur = 0;        // If the current sum becomes negative, reset it to 0.
+            cur += x;           // Add the current element to the current sum.
+            max_sum = max(max_sum, cur);   // Update the maximum sum encountered so far.
+        }
+        
+        return max_sum;         // Return the maximum sum found.
+    }
+};
+```
+
+### Algorithm steps:
+1. Initialize `max_sum` to the smallest possible integer value (`INT_MIN`) to ensure any sum calculated will be greater than it.
+2. Initialize `cur` to 0. This variable will hold the sum of the current subarray.
+3. Iterate through each element `x` in `nums`.
+4. If the current sum `cur` becomes negative (indicating that it would decrease the overall sum), reset `cur` to 0. This is because any subarray with a negative sum is not beneficial for finding the maximum subarray sum.
+5. Add the current element `x` to the current sum `cur`.
+6. Update `max_sum` to be the maximum of the current `max_sum` and `cur`. This keeps track of the maximum subarray sum encountered so far.
+7. After iterating through all elements, return `max_sum`, which holds the maximum subarray sum found.
+
+### Time complexity:
+- The time complexity of this code is O(n), where n is the number of elements in the `nums` vector. This is because we iterate through `nums` once.
+
+### Space complexity:
+- The space complexity of this code is O(1), as we only use a constant amount of extra space regardless of the size of the input vector `nums`.
+
+This code efficiently finds the maximum subarray sum using Kadane's algorithm, with linear time complexity and constant space complexity. There's no significant reduction possible in time or space complexity for this problem, as Kadane's algorithm is already optimal.
+
+## Kadane's Algorithm
+
+Kadane's Algorithm is a clever method used to find the maximum sum of a contiguous subarray within a one-dimensional array of numbers. Here's how it works in simple words:
+
+1. **Start with two variables:** One to keep track of the current sum of the subarray (let's call it `currentSum`) and another to keep the highest sum we have found so far (`maxSum`). Initially, `currentSum` can be set to , and `maxSum` can be set to the lowest possible value or the first element of the array, depending on the implementation.
+
+2. **Walk through the array:** For each element in the array, add the current element to `currentSum`.
+
+3. **Check if the current element is greater than `currentSum`:** If adding the current element causes the `currentSum` to become less than the current element itself, then discard the `currentSum` up to that point, and start a new `currentSum` from the current element. This step ensures that you are always considering subarrays that could potentially have the highest sum.
+
+4. **Update `maxSum` if necessary:** If the `currentSum` is higher than the `maxSum`, update the `maxSum` with the value of `currentSum`. This step ensures that `maxSum` always holds the highest sum found so far.
+
+5. **Repeat steps 2-4 for each element in the array.**
+
+By the end of the array, `maxSum` will contain the highest sum of any contiguous subarray. The beauty of Kadane's Algorithm is that it achieves this in a single pass through the array, making it very efficient with a time complexity of O(n), where n is the number of elements in the array.

@@ -1,1 +1,18 @@
-{"dfs":2, "graph":1, "geeksforgeeks":2, "dynamic programming":2, "algorithms":1, "array":3, "queue":1, "leetcode":4, "two pointers":2, "stack":1, "monotonic stack":1, "tree":1, "binary tree":1}
+{
+"dfs":2, 
+"graph":1, 
+"geeksforgeeks":2, 
+"dynamic programming":3, 
+"algorithms":1, 
+"array":7, 
+"queue":1, 
+"leetcode":8, 
+"two pointers":2, 
+"stack":1, 
+"monotonic stack":1, 
+"tree":1, 
+"binary tree":1,
+"hash table":2,
+"sorting":1,
+"prefix sum":1
+}
