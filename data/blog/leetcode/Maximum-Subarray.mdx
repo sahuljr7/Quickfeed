@@ -2,7 +2,7 @@
 title: 'Maximum Subarray'
 date: '2024-04-16'
 lastmod: '2024-04-16'
-tags: ['array', 'divide and conquer', 'dynamic programming','leetcode']
+tags: ['array', 'divide and conquer', 'dynamic programming', 'leetcode']
 draft: false
 summary: Given an integer array nums, find the subarray with the largest sum, and return its sum.
 ---
@@ -38,7 +38,7 @@ public:
 };
 ```
 
-### Algorithm steps:
+## Algorithm steps
 1. Initialize `max_sum` to the smallest possible integer value (`INT_MIN`) to ensure any sum calculated will be greater than it.
 2. Initialize `cur` to 0. This variable will hold the sum of the current subarray.
 3. Iterate through each element `x` in `nums`.
@@ -47,10 +47,10 @@ public:
 6. Update `max_sum` to be the maximum of the current `max_sum` and `cur`. This keeps track of the maximum subarray sum encountered so far.
 7. After iterating through all elements, return `max_sum`, which holds the maximum subarray sum found.
 
-### Time complexity:
+## Time complexity
 - The time complexity of this code is O(n), where n is the number of elements in the `nums` vector. This is because we iterate through `nums` once.
 
-### Space complexity:
+## Space complexity
 - The space complexity of this code is O(1), as we only use a constant amount of extra space regardless of the size of the input vector `nums`.
 
 This code efficiently finds the maximum subarray sum using Kadane's algorithm, with linear time complexity and constant space complexity. There's no significant reduction possible in time or space complexity for this problem, as Kadane's algorithm is already optimal.
