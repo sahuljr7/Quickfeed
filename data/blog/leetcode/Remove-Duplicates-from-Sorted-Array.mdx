@@ -1,0 +1,63 @@
+---
+title: 'Remove Duplicates from Sorted Array'
+date: '2024-04-16'
+lastmod: '2024-04-16'
+tags: ['array', 'two pointers','leetcode']
+draft: false
+summary: Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique element appears only once. The relative order of the elements should be kept the same. Then return the number of unique elements in nums.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
+
+## Solution
+
+```cpp
+class Solution {
+public:
+  int removeDuplicates(vector<int>& nums) {
+    // Initialize a variable i to keep track of the position to overwrite in nums
+    int i = 0;
+
+    // Iterate through each element num in nums
+    for (const int num : nums)
+      // Check if either i is less than 1 (meaning first element) or num is greater than the previous element
+      if (i < 1 || num > nums[i - 1])
+        // If the condition is true, update the current element in nums and increment i
+        nums[i++] = num;
+
+    // Return the length of the modified nums array
+    return i;
+  }
+};
+```
+
+### Algorithm steps:
+1. Start with an index `i` set to 0.
+2. Iterate through each element `num` in the given array `nums`.
+3. Check if `i` is less than 1 (indicating the first element) or if the current element `num` is greater than the previous element in `nums`.
+4. If the condition is true, update the element at index `i` in `nums` with the current element `num` and increment `i`.
+5. Repeat steps 3-4 for all elements in `nums`.
+6. Return the value of `i`, which represents the length of the modified `nums` array without duplicates.
+
+### Time complexity:
+- The time complexity of this code is O(n), where n is the length of the input array `nums`. This is because we iterate through each element of `nums` once.
+
+### Space complexity:
+- The space complexity of this code is O(1), as we only use a constant amount of extra space regardless of the size of the input array `nums`.
+
+To reduce complexity, we can simplify the code by directly using the `std::unique` function from the `<algorithm>` header in C++. Here's the modified code:
+
+```cpp
+class Solution {
+public:
+  int removeDuplicates(vector<int>& nums) {
+    // Use the std::unique function to remove duplicates
+    nums.erase(std::unique(nums.begin(), nums.end()), nums.end());
+    // Return the new length of the modified nums array
+    return nums.size();
+  }
+};
+```
+
+The time complexity of the modified code remains O(n), where n is the length of the input array `nums`, because `std::unique` has linear time complexity. However, the space complexity is O(1) because `std::unique` modifies the array in place without using any additional space.

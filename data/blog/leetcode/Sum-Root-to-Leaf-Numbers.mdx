@@ -1,0 +1,90 @@
+---
+title: 'Sum Root to Leaf Numbers'
+date: '2024-04-16'
+lastmod: '2024-04-16'
+tags: ['tree', 'dfs', 'binary tree','leetcode']
+draft: false
+summary: You are given the root of a binary tree containing digits from 0 to 9 only. Each root-to-leaf path in the tree represents a number. For example, the root-to-leaf path 1 -> 2 -> 3 represents the number 123. Return the total sum of all root-to-leaf numbers. Test cases are generated so that the answer will fit in a 32-bit integer. A leaf node is a node with no children.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/sum-root-to-leaf-numbers/description/)
+
+## Solution
+
+```cpp
+class Solution {
+public:
+  int sumNumbers(TreeNode* root) {
+    // Initialize a variable to store the sum
+    int ans = 0;
+    // Call the depth-first search function to compute the sum
+    dfs(root, 0, ans);
+    // Return the computed sum
+    return ans;
+  }
+
+private:
+  void dfs(TreeNode* root, int path, int& ans) {
+    // If the current node is null, return and do nothing
+    if (root == nullptr)
+      return;
+    // If the current node is a leaf node
+    if (root->left == nullptr && root->right == nullptr) {
+      // Compute the sum and update the answer
+      ans += path * 10 + root->val;
+      // Return as we don't need to explore further
+      return;
+    }
+
+    // Recursively call dfs for the left child with updated path and ans
+    dfs(root->left, path * 10 + root->val, ans);
+    // Recursively call dfs for the right child with updated path and ans
+    dfs(root->right, path * 10 + root->val, ans);
+  }
+};
+```
+
+### Algorithm steps:
+1. Start with the root node of the tree.
+2. Initialize a variable `ans` to store the sum.
+3. Call the depth-first search function (`dfs`) with the root node, initial path value 0, and `ans`.
+4. In the `dfs` function:
+   - Check if the current node is null. If so, return.
+   - If the current node is a leaf node, compute the sum of the path so far and update `ans`.
+   - Recursively call `dfs` for the left child with an updated path and `ans`.
+   - Recursively call `dfs` for the right child with an updated path and `ans`.
+5. Return the final `ans` after the `dfs` function completes.
+
+### Time complexity:
+- The time complexity of this code is `O(n)`, where `n` is the number of nodes in the tree. This is because we visit each node exactly once.
+
+### Space complexity:
+- The space complexity is also `O(n)` in the worst case. This is because of the recursion stack, which can go as deep as the height of the tree.
+
+To reduce complexity, we can avoid passing the `ans` variable by reference and instead return the sum from the `dfs` function. Here's the modified code:
+
+```cpp
+class Solution {
+public:
+  int sumNumbers(TreeNode* root) {
+    // Call the depth-first search function to compute the sum
+    return dfs(root, 0);
+  }
+
+private:
+  int dfs(TreeNode* root, int path) {
+    // If the current node is null, return 0
+    if (root == nullptr)
+      return 0;
+    // If the current node is a leaf node, return the computed sum
+    if (root->left == nullptr && root->right == nullptr)
+      return path * 10 + root->val;
+
+    // Recursively call dfs for the left child and right child
+    return dfs(root->left, path * 10 + root->val) + dfs(root->right, path * 10 + root->val);
+  }
+};
+```
+
+The time complexity and space complexity of this modified code remain the same, `O(n)`.
