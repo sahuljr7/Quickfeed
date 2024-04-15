@@ -2,11 +2,11 @@
 "dfs":2, 
 "graph":1, 
 "geeksforgeeks":2, 
-"dynamic programming":3, 
+"dynamic programming":4, 
 "algorithms":1, 
-"array":7, 
+"array":8, 
 "queue":1, 
-"leetcode":8, 
+"leetcode":9, 
 "two pointers":2, 
 "stack":1, 
 "monotonic stack":1, 
@@ -14,5 +14,6 @@
 "binary tree":1,
 "hash table":2,
 "sorting":1,
-"prefix sum":1
+"prefix sum":1,
+"divide and conquer":1
 }
