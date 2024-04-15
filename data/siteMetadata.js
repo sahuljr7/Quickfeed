@@ -3,7 +3,7 @@ const siteMetadata = {
   title: 'QuickFeed',
   author: 'Sahul Kumar Parida',
   headerTitle: 'QuickFeed',
-  description: 'Stay informed in a flash with QuickFeed, your shortcut to breaking news.',
+  description: 'Your ultimate destination for mastering coding interviews, solving problems from GeeksforGeeks, LeetCode, and more, alongside tech blogs and articles to stay updated in the world of technology.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://quickfeed.vercel.app/',
