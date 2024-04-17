@@ -1,0 +1,68 @@
+---
+title: 'Kadane's Algorithm'
+date: '2024-04-17'
+lastmod: '2024-04-17'
+tags: ['array', 'dynamic programming', 'data structures', 'geeksforgeeks']
+draft: false
+summary: 'Given an array Arr[] of N integers. Find the contiguous sub-array(containing at least one number) which has the maximum sum and return its sum.'
+---
+
+## Problem Statement
+[GFG Question Link](https://www.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1)
+
+Given an array Arr[] of N integers. Find the contiguous sub-array(containing at least one number) which has the maximum sum and return its sum.
+
+## Solution
+
+```cpp
+class Solution{
+    public:
+    // Function to find the sum of contiguous subarray with maximum sum.
+    // arr: input array
+    // n: size of array
+    long long maxSubarraySum(int arr[], int n){
+        
+        long long sum = ; // Initialize sum to track the current subarray sum
+        long long maxi = arr[]; // Initialize maxi to the first element of the array for tracking maximum sum found so far
+        if (n == ) return ; // If array size is , return  as there are no elements to sum
+        
+        for (int i = ; i < n; ++i) { // Loop through every element of the array
+          sum += arr[i]; // Add the current element to the current sum
+          maxi = max(maxi , sum); // Update maxi to the maximum of itself and the current sum
+          if(sum < ){ // If the current sum becomes negative
+              sum = ; // Reset the current sum to  to start a new subarray
+          }
+        }
+        return maxi; // Return the maximum sum found
+        
+    }
+};
+```
+
+## Algorithm steps:
+
+   - Initialize `sum` as  to keep track of the current subarray sum.
+   - Initialize `maxi` to `arr[]` (the first element) for tracking the maximum subarray sum.
+   - If the array size `n` is , immediately return .
+   - Iterate over each element in the array:
+     - Add the current element to the `sum`.
+     - Update `maxi` to be the greater value between `maxi` and `sum`.
+     - If `sum` becomes negative, reset `sum` to  to start considering a new subarray.
+   - Return the value of `maxi` as the result.
+
+## Time Complexity
+
+   - Time Complexity: O(n), where n is the size of the array.
+     - This is because the code iterates through the array once.
+
+## Space Complexity
+   - Space Complexity: O(1)
+     - The space complexity is constant because the solution only uses a fixed number of variables (`sum` and `maxi`) and does not depend on the size of the input array.
+   
+## Can the complexity be reduced?
+
+   - The time complexity of this algorithm cannot be reduced below O(n) because each element needs to be visited at least once to ensure all subarrays are considered.
+
+   - The space complexity is already optimal at O(1) since no additional space is required that grows with the input size.
+
+   Therefore, since the time and space complexities are already optimal, there's no need to reduce them further or to rewrite the code for complexity reduction.
