@@ -1,0 +1,31 @@
+---
+title: 'What is a Greedy Algorithm?'
+date: '2024-04-18'
+lastmod: '2024-04-18'
+tags: ['greedy algorithm', 'data structures']
+draft: false
+summary: 'A greedy algorithm is a type of optimization algorithm that makes locally optimal choices at each step with the goal of finding a globally optimal solution. It operates on the principle of “taking the best option now” without considering the long-term consequences.'
+---
+
+A greedy algorithm is a simple, intuitive algorithmic paradigm that follows the problem-solving heuristic of making the locally optimal choice at each stage with the hope of finding a global optimum. In other words, a greedy algorithm makes the best decision it can at each step, aiming for an overall optimal solution.
+
+Here’s how a greedy algorithm works in typical problem scenarios:
+
+1. **Initialization**: Understand the structure of the problem to identify how to approach it in stages.
+
+2. **Selection**: At each step, choose the option that seems the best at that moment without considering the bigger problem as a whole.
+
+3. **Feasibility**: Ensure that the choice made is feasible, i.e., it is valid according to the problem constraints.
+
+4. **Optimality**: The chosen local solution should seem to lead to an optimal global solution. This often requires an argument or proof that the local optimality can lead to global optimality.
+
+5. **Termination**: Repeat the process until all stages are complete or the end condition of the algorithm is met.
+
+It should be noted that greedy algorithms do not guarantee an optimal solution for all problems. They are best suited for problems where local optimization leads to an overall optimal solution (e.g., finding the shortest path on a graph using Dijkstra's algorithm). However, for many complex problems, a greedy approach might yield suboptimal solutions (e.g., in the case of the Knapsack problem or making change with certain coin denominations).
+
+The effectiveness of a greedy algorithm is heavily dependent on the problem. The two key components for a greedy algorithm to be successful are:
+
+- **Greedy Choice Property**: A global optimum can be arrived at by selecting a local optimum.
+- **Optimal Substructure**: An optimal solution to the problem contains optimal solutions to the sub-problems.
+
+When these properties hold, a greedy algorithm can quickly find solutions, which could otherwise be computationally expensive to obtain.
