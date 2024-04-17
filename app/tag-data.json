@@ -1,10 +1,10 @@
 {
 "dfs":2, 
 "graph":1, 
-"geeksforgeeks":2, 
-"dynamic programming":5, 
+"geeksforgeeks":3, 
+"dynamic programming":6, 
 "algorithms":3, 
-"array":8, 
+"array":9, 
 "queue":1, 
 "leetcode":9, 
 "two pointers":2, 
@@ -15,5 +15,6 @@
 "hash table":2,
 "sorting":1,
 "prefix sum":1,
-"divide and conquer":2
+"divide and conquer":2,
+"data structures":1
 }
