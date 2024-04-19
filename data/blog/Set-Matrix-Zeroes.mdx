@@ -1,0 +1,315 @@
+---
+title: 'Set Matrix Zeroes'
+date: '2024-04-19'
+lastmod: '2024-04-19'
+tags: ['array', 'hash table', 'matrix', 'leetcode', 'striver dsa sheet']
+draft: false
+summary: Given a matrix if an element in the matrix is 0 then you will have to set its entire column and row to 0 and then return the matrix.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/set-matrix-zeroes/description/)
+
+Given a matrix if an element in the matrix is 0 then you will have to set its entire column and row to 0 and then return the matrix.
+
+## Brute Force Approach
+
+```cpp
+#include <bits/stdc++.h>
+// Includes all standard C++ library headers
+
+using namespace std;
+// Uses the standard namespace to avoid writing std::
+
+void markRow(vector<vector<int>> &matrix, int n, int m, int i) {
+// Function to mark all non-zero elements as -1 in the row i of the matrix
+
+    // set all non-zero elements as -1 in the row i:
+    for (int j = 0; j < m; j++) {
+        if (matrix[i][j] != 0) {
+            matrix[i][j] = -1;
+        }
+    }
+}
+
+void markCol(vector<vector<int>> &matrix, int n, int m, int j) {
+// Function to mark all non-zero elements as -1 in the column j of the matrix
+
+    // set all non-zero elements as -1 in the col j:
+    for (int i = 0; i < n; i++) {
+        if (matrix[i][j] != 0) {
+            matrix[i][j] = -1;
+        }
+    }
+}
+
+vector<vector<int>> zeroMatrix(vector<vector<int>> &matrix, int n, int m) {
+// Function to convert all elements in the same row and column as 0 to 0
+
+    // Set -1 for rows and cols that contains 0.
+    // Don't mark any 0 as -1:
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] == 0) {
+                markRow(matrix, n, m, i);
+                markCol(matrix, n, m, j);
+            }
+        }
+    }
+
+    // Finally, mark all -1 as 0:
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] == -1) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    return matrix;
+}
+
+int main()
+{
+    vector<vector<int>> matrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+    // Initialize the input matrix
+    int n = matrix.size();
+    int m = matrix[0].size();
+    // Get the number of rows and columns
+
+    vector<vector<int>> ans = zeroMatrix(matrix, n, m);
+    // Call the zeroMatrix function and store the result
+
+    cout << "The Final matrix is: \n";
+    // Print the result
+    for (auto it : ans) {
+        for (auto ele : it) {
+            cout << ele << " ";
+        }
+        cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+### Algorithm steps:
+
+1. Define a function `markRow` to mark all non-zero elements as -1 in a given row
+2. Define a function `markCol` to mark all non-zero elements as -1 in a given column
+3. Define a function `zeroMatrix` to convert all elements in the same row and column as 0 to 0
+4. In the `zeroMatrix` function:
+    a. Iterate over the matrix
+    b. If an element is 0, call `markRow` and `markCol` functions to mark the corresponding row and column
+    c. Iterate over the matrix again
+    d. If an element is -1, convert it to 0
+    e. Return the modified matrix
+5. In the main function:
+    a. Initialize the input matrix
+    b. Get the number of rows and columns
+    c. Call the `zeroMatrix` function and store the result
+    d. Print the result
+
+
+### Time Complexity and Space Complexity
+
+   Time Complexity: O(n * m), where n is the number of rows and m is the number of columns.
+   The code iterates over the matrix twice, once to mark the rows and columns, and once to convert -1 to 0.
+
+   Space Complexity: O(1), as the code modifies the input matrix in-place without using any additional data structures that scale with the input size.
+
+
+## Better Approach
+
+```cpp
+#include <bits/stdc++.h>
+// Includes all standard C++ library headers
+
+using namespace std;
+// Uses the standard namespace to avoid writing std::
+
+vector<vector<int>> zeroMatrix(vector<vector<int>> &matrix, int n, int m) {
+// Function to convert all elements in the same row and column as 0 to 0
+
+    int row[n] = {0}; // row array initialized with 0s
+    int col[m] = {0}; // col array initialized with 0s
+
+    // Traverse the matrix:
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] == 0) {
+                // mark ith index of row with 1:
+                row[i] = 1;
+                // mark jth index of col with 1:
+                col[j] = 1;
+            }
+        }
+    }
+
+    // Finally, mark all (i, j) as 0
+    // if row[i] or col[j] is marked with 1.
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (row[i] || col[j]) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    return matrix;
+}
+
+int main()
+{
+    vector<vector<int>> matrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+    // Initialize the input matrix
+    int n = matrix.size();
+    int m = matrix[0].size();
+    // Get the number of rows and columns
+
+    vector<vector<int>> ans = zeroMatrix(matrix, n, m);
+    // Call the zeroMatrix function and store the result
+
+    cout << "The Final matrix is: \n";
+    // Print the result
+    for (auto it : ans) {
+        for (auto ele : it) {
+            cout << ele << " ";
+        }
+        cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+### Algorithm steps:
+
+1. Define a function `zeroMatrix` to convert all elements in the same row and column as 0 to 0
+2. Initialize two arrays `row` and `col` with 0s, having sizes `n` and `m` respectively
+3. Traverse the matrix
+4. If an element is 0, mark the corresponding row and column indices in `row` and `col` arrays as 1
+5. Traverse the matrix again
+6. If `row[i]` or `col[j]` is marked as 1, set the element `matrix[i][j]` as 0
+7. Return the modified matrix
+8. In the main function:
+    a. Initialize the input matrix
+    b. Get the number of rows and columns
+    c. Call the `zeroMatrix` function and store the result
+    d. Print the result
+
+### Time Complexity and Space Complexity
+   
+   Time Complexity: O(n * m), where n is the number of rows and m is the number of columns.
+   The code iterates over the matrix twice, once to mark the rows and columns, and once to convert elements to 0.
+
+   Space Complexity: O(n + m), as the code uses two additional arrays row and col of sizes n and m respectively to keep track of the rows and columns that need to be marked as 0.
+
+## Optimal Approach
+
+1. Comments for each line of code:
+
+```cpp
+#include <bits/stdc++.h>
+// Includes all standard C++ library headers
+
+using namespace std;
+// Uses the standard namespace to avoid writing std::
+
+vector<vector<int>> zeroMatrix(vector<vector<int>> &matrix, int n, int m) {
+// Function to convert all elements in the same row and column as 0 to 0
+
+    // int row[n] = {0}; --> matrix[..][0]
+    // int col[m] = {0}; --> matrix[0][..]
+    int col0 = 1; // Flag to check if the 0th column needs to be marked
+
+    // step 1: Traverse the matrix and
+    // mark 1st row & col accordingly:
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (matrix[i][j] == 0) {
+                // mark i-th row:
+                matrix[i][0] = 0;
+                // mark j-th column:
+                if (j != 0)
+                    matrix[0][j] = 0;
+                else
+                    col0 = 0; // Mark the flag if the 0th column needs to be marked
+            }
+        }
+    }
+
+    // Step 2: Mark with 0 from (1,1) to (n-1, m-1):
+    for (int i = 1; i < n; i++) {
+        for (int j = 1; j < m; j++) {
+            if (matrix[i][j] != 0) {
+                // check for col & row:
+                if (matrix[i][0] == 0 || matrix[0][j] == 0) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+
+    //step 3: Finally mark the 1st col & then 1st row:
+    if (matrix[0][0] == 0) {
+        for (int j = 0; j < m; j++) {
+            matrix[0][j] = 0; // Mark the 0th row
+        }
+    }
+    if (col0 == 0) {
+        for (int i = 0; i < n; i++) {
+            matrix[i][0] = 0; // Mark the 0th column
+        }
+    }
+
+    return matrix;
+}
+
+int main()
+{
+    vector<vector<int>> matrix = {{1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
+    // Initialize the input matrix
+    int n = matrix.size();
+    int m = matrix[0].size();
+    // Get the number of rows and columns
+
+    vector<vector<int>> ans = zeroMatrix(matrix, n, m);
+    // Call the zeroMatrix function and store the result
+
+    cout << "The Final matrix is: \n";
+    // Print the result
+    for (auto it : ans) {
+        for (auto ele : it) {
+            cout << ele << " ";
+        }
+        cout << "\n";
+    }
+
+    return 0;
+}
+```
+
+### Algorithm steps:
+
+1. Define a function `zeroMatrix` to convert all elements in the same row and column as 0 to 0
+2. Initialize a flag `col0` with 1 to keep track of whether the 0th column needs to be marked
+3. Traverse the matrix
+4. If an element is 0, mark the corresponding row (`matrix[i][0]`) and column (`matrix[0][j]`) as 0, except for the 0th column (set `col0` to 0 if a 0 is encountered in the 0th column)
+5. Traverse the matrix from (1,1) to `(n-1, m-1)`
+6. If `matrix[i][0]` or `matrix[0][j]` is marked as 0, set the element `matrix[i][j]` as 0
+7. If `matrix[0][0]` is 0, mark the entire 0th row as 0
+8. If `col0` is 0, mark the entire 0th column as 0
+9. Return the modified matrix
+10. In the main function:
+    a. Initialize the input matrix
+    b. Get the number of rows and columns
+    c. Call the `zeroMatrix` function and store the result
+    d. Print the result
+
+
+### Time Complexity and Space Complexity
+   Time Complexity: O(n * m), where n is the number of rows and m is the number of columns.
+   The code iterates over the matrix three times, first to mark the rows and columns, then to update the elements from (1,1) to (n-1, m-1), and finally to update the 0th row and column.
+
+   Space Complexity: O(1), as the code uses only constant extra space to store the col0 flag. The matrix itself is modified in-place without using any additional data structures that scale with the input size.
