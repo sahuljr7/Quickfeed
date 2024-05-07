@@ -6,9 +6,9 @@
 "algorithms":3, 
 "array":11, 
 "queue":1, 
-"leetcode":11, 
+"leetcode":12, 
 "two pointers":2, 
-"stack":1, 
+"stack":2, 
 "monotonic stack":1, 
 "matrix":2,
 "tree":1, 
@@ -23,5 +23,7 @@
 "quantum computing":2,
 "machine learning":3, 
 "ai":3, 
-"meta learning":1
+"meta learning":1,
+"linked list": 1,
+"math": 1
 }
