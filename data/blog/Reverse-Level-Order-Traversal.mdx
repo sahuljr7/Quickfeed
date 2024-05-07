@@ -1,0 +1,64 @@
+---
+title: 'Reverse Level Order Traversal'
+date: '2024-05-07'
+lastmod: '2024-05-07'
+tags: ['tree', 'data structures', 'geeksforgeeks']
+draft: false
+summary: Given a binary tree of size n, find its reverse level order traversal. ie- the traversal must begin from the last level.
+---
+
+## Problem Statement
+
+[GFG Question Link](https://www.geeksforgeeks.org/problems/reverse-level-order-traversal/1)
+
+Given a binary tree of size n, find its reverse level order traversal. ie- the traversal must begin from the last level.
+
+## Solution
+
+```cpp
+vector<int> reverseLevelOrder(Node *root) // Function definition taking a pointer to the root node as argument and returning a vector of integers.
+{
+    // code here // Placeholder comment indicating that the actual code will be written here.
+    vector<int> v; // Declaration of a vector 'v' to store the reversed level order traversal.
+    queue<Node *> q; // Declaration of a queue 'q' to perform level order traversal.
+    q.push(root); // Enqueue the root node into the queue to start the traversal.
+    while (!q.empty()) // Loop until the queue is not empty.
+    {
+        Node *curr = q.front(); // Get the front element of the queue.
+        q.pop(); // Remove the front element from the queue.
+        v.push_back(curr->data); // Push the data of the current node into the vector.
+        if (curr->right) // Check if the current node has a right child.
+        {
+            q.push(curr->right); // Enqueue the right child.
+        }
+        if (curr->left) // Check if the current node has a left child.
+        {
+            q.push(curr->left); // Enqueue the left child.
+        }
+    }
+    reverse(v.begin(), v.end()); // Reverse the vector to get the reverse level order traversal.
+    return v; // Return the vector containing the reverse level order traversal.
+}
+```
+
+### Algorithm steps:
+
+1. Start with the root node.
+2. Enqueue the root node into a queue.
+3. While the queue is not empty, repeat steps 4 to 8.
+4. Dequeue a node from the front of the queue.
+5. Push the data of the dequeued node into a vector.
+6. If the dequeued node has a right child, enqueue it.
+7. If the dequeued node has a left child, enqueue it.
+8. Repeat steps 3 to 7 until all nodes are processed.
+9. Reverse the vector to obtain the reverse level order traversal.
+10. Return the reversed vector.
+
+### Time complexity:
+- The time complexity of this algorithm is O(n), where n is the number of nodes in the binary tree. This is because each node is visited once.
+
+### Space complexity:
+- The space complexity of this algorithm is also O(n), where n is the number of nodes in the binary tree. This is because at any given time, the queue can hold at most one level of nodes in the binary tree, which can be up to n/2 nodes for a completely balanced binary tree.
+
+### Complexity reduction:
+- The time and space complexity of the given algorithm is already optimal for performing a level order traversal and obtaining the reverse level order traversal. Therefore, there is no further reduction possible in the time and space complexity.
