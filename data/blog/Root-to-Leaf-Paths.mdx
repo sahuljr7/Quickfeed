@@ -1,0 +1,169 @@
+---
+title: 'Root to Leaf Paths'
+date: '2024-05-08'
+lastmod: '2024-05-08'
+tags: ['tree', 'data structures', 'recursion', 'arrays', 'binary search tree','geeksforgeeks']
+draft: false
+summary: Given a Binary Tree of nodes, you need to find all the possible paths from the root node to all the leaf nodes of the binary tree.
+---
+
+## Problem Statement
+
+[GFG Question Link](https://www.geeksforgeeks.org/problems/root-to-leaf-paths/1)
+
+Given a Binary Tree of nodes, you need to find all the possible paths from the root node to all the leaf nodes of the binary tree.
+
+## Solution
+
+```cpp
+class Solution {
+public:
+  // Declaration of a 2D vector 'ans' to store paths.
+  vector<vector<int>> ans; 
+
+  // Definition of a helper function 'solve' taking a pointer to Node 'root' and a reference to a vector 'temp' as arguments.
+  void solve(Node* root, vector<int>& temp) { 
+
+    // If the root is NULL, return.
+    if (root == NULL) return; 
+    
+    // If the root is a leaf node.
+    if (root->left == NULL && root->right == NULL) 
+    { 
+      // Push the data of the leaf node into the 'temp' vector.
+      temp.push_back(root->data); 
+      // Push the 'temp' vector (representing a path) into the 'ans' vector.
+      ans.push_back(temp); 
+      // Remove the last element from 'temp'.
+      temp.pop_back(); 
+      return;
+    }
+    
+    // Push the data of the current node into 'temp'.
+    temp.push_back(root->data); 
+    
+    // Recursively call 'solve' for the left child.
+    solve(root->left, temp); 
+    
+    // Recursively call 'solve' for the right child.
+    solve(root->right, temp); 
+    
+    // If 'temp' is not empty.
+    if (!temp.empty()) 
+      // Remove the last element from 'temp'.
+      temp.pop_back(); 
+  }
+
+  // Definition of the main function 'Paths' taking a pointer to Node 'root' as argument and returning a 2D vector.
+  vector<vector<int>> Paths(Node* root) 
+  {
+    // Declaration of a vector 'temp' to store the current path. 
+    vector<int> temp; 
+    // Call the helper function 'solve' to find all paths.
+    solve(root, temp); 
+    // Return the 2D vector containing all paths.
+    return ans; 
+  }
+};
+```
+
+### Algorithm steps:
+
+1. Start from the root node.
+2. Initialize an empty vector 'temp' to store the current path.
+3. Call the helper function 'solve' with the root node and 'temp'.
+4. In 'solve' function:
+   - If the current node is NULL, return.
+   - If the current node is a leaf node, push its data into 'temp', push 'temp' into 'ans', and then pop the last element from 'temp'.
+   - If the current node is not a leaf node, push its data into 'temp', then recursively call 'solve' for its left and right children.
+   - After recursive calls, if 'temp' is not empty, pop the last element from 'temp'.
+5. After the 'solve' function finishes for the root node, return 'ans' containing all paths.
+
+### Time complexity:
+- The time complexity of this algorithm is O(n), where n is the number of nodes in the binary tree. This is because each node is visited exactly once.
+
+### Space complexity:
+- The space complexity of this algorithm is O(n * h), where n is the number of nodes and h is the height of the binary tree. This is because the space required for the recursive call stack is proportional to the height of the tree.
+
+### Complexity reduction:
+- The time complexity seems optimal for the task of finding all root-to-leaf paths in a binary tree. However, the space complexity can be reduced by avoiding the use of the global variable 'ans'. Instead, we can pass it as a reference parameter to the 'solve' function. Here's the modified code:
+
+```cpp
+// Declaration of a class named Solution.
+class Solution 
+{          
+// Access specifier for the following member functions.                          
+public:       
+  // Declaration of a function named solve which takes a pointer to Node, a reference to a vector of integers, and a reference to a vector of vectors of integers as arguments.                                       
+  void solve(Node* root, vector<int>& temp, vector<vector<int>>& ans) 
+  {  
+     // If the root node is NULL, return from the function.
+    if (root == NULL) return;                       
+    
+    // If the current node is a leaf node.
+    if (root->left == NULL && root->right == NULL) 
+    { 
+      // Push the data of the current node into the temporary vector.
+      temp.push_back(root->data);  
+      // Push the temporary vector containing the path into the answer vector.                  
+      ans.push_back(temp);        
+      // Remove the last element from the temporary vector.                   
+      temp.pop_back();     
+      // Return from the function.                          
+      return;                                        
+    }
+    
+    // Push the data of the current node into the temporary vector.
+    temp.push_back(root->data);                      
+    
+    // Recursively call solve function for the left child of the current node.
+    solve(root->left, temp, ans);                    
+    
+    // Recursively call solve function for the right child of the current node.
+    solve(root->right, temp, ans);                   
+    
+    // If the temporary vector is not empty.
+    if (!temp.empty())  
+      // Remove the last element from the temporary vector.                             
+      temp.pop_back();                               
+  }
+
+  // Declaration of a function named Paths which takes a pointer to Node as argument and returns a vector of vectors of integers.
+  vector<vector<int>> Paths(Node* root) 
+  {           
+    // Declaration of a vector of vectors of integers named ans.
+    vector<vector<int>> ans;        
+    // If the root node is NULL, return the empty answer vector.                 
+    if (root == NULL) return ans;   
+    // Declaration of a temporary vector of integers named temp.                 
+    vector<int> temp;  
+     // Call the solve function to find all paths from the root node and store them in ans.                              
+    solve(root, temp, ans);      
+    // Return the answer vector containing all paths.                   
+    return ans;                                      
+  }
+};
+```
+
+This modification doesn't change the time complexity but reduces the space complexity to O(h), where h is the height of the binary tree, as it eliminates the use of the global variable 'ans' and passes it as a reference parameter instead.
+
+### Algorithm steps for the code:
+
+1. Start with the root node.
+2. Create an empty vector to store the current path.
+3. If the root node is NULL, return an empty vector.
+4. If the current node is a leaf node, add its value to the current path and add the path to the answer vector. Then remove the last element from the current path.
+5. If the current node is not a leaf node, add its value to the current path.
+6. Recursively call the function for the left child of the current node.
+7. Recursively call the function for the right child of the current node.
+8. If the current path is not empty, remove the last element from the current path.
+9. Return the answer vector containing all paths.
+
+### Time complexity: 
+
+𝑂(𝑁), where 𝑁 is the number of nodes in the tree. This is because we visit each node once.
+
+### Space complexity: 
+
+𝑂(𝐻), where 𝐻 is the height of the binary tree. This is because the space used by the recursion stack is proportional to the height of the tree. Additionally, the space used by the answer vector is proportional to the number of paths in the tree, which can be at most equal to the number of leaf nodes, hence 
+𝑂(𝑁) in the worst case.
