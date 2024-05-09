@@ -1,0 +1,74 @@
+---
+title: 'Relative Ranks Leetcode Solution'
+date: '2024-05-08'
+lastmod: '2024-05-08'
+tags: ['array', 'sorting', 'heap', 'priority queue', 'leetcode']
+draft: false
+summary: You are given an integer array score of size n, where score[i] is the score of the ith athlete in a competition. All the scores are guaranteed to be unique. Return an array answer of size n where answer[i] is the rank of the ith athlete.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/relative-ranks/description/)
+
+You are given an integer array score of size n, where score[i] is the score of the ith athlete in a competition. All the scores are guaranteed to be unique. Return an array answer of size n where answer[i] is the rank of the ith athlete.
+
+<TOCInline toc={props.toc} exclude="Problem Statement" />
+
+## Solution
+```cpp
+class Solution {
+ public:
+  // Function to find relative ranks
+  vector<string> findRelativeRanks(vector<int>& nums) {
+    // Getting the size of input array
+    const int n = nums.size();
+    // Creating a vector to store the result
+    vector<string> ans(n);
+    // Creating a vector to store indices
+    vector<int> indices(n);
+
+    // Filling indices vector with consecutive values starting from 0
+    iota(indices.begin(), indices.end(), 0);
+
+    // Sorting indices vector based on the values of nums in descending order
+    ranges::sort(indices,
+                 [&](const int a, const int b) { return nums[a] > nums[b]; });
+
+    // Iterating over the sorted indices
+    for (int i = 0; i < n; ++i)
+      // Assigning medals or ranks based on the index position
+      if (i == 0)
+        ans[indices[0]] = "Gold Medal";
+      else if (i == 1)
+        ans[indices[1]] = "Silver Medal";
+      else if (i == 2)
+        ans[indices[2]] = "Bronze Medal";
+      else
+        ans[indices[i]] = to_string(i + 1);
+
+    // Returning the result vector
+    return ans;
+  }
+};
+```
+
+### Algorithm Steps:
+1. Initialize variables: `n` as the size of the input vector `nums`, `ans` as an empty vector of strings to store results, and `indices` as a vector of integers to store indices.
+2. Populate `indices` with consecutive values starting from 0 using `iota`.
+3. Sort `indices` based on the values of `nums` in descending order.
+4. Iterate over `indices`:
+   - If the index `i` is 0, assign "Gold Medal" to the corresponding index in `ans`.
+   - If `i` is 1, assign "Silver Medal".
+   - If `i` is 2, assign "Bronze Medal".
+   - Otherwise, assign the rank converted to string (i+1) to the corresponding index in `ans`.
+5. Return the `ans` vector.
+
+### Time Complexity: 
+
+O(n log n) - due to the sorting operation.
+
+### Space Complexity: 
+
+O(n) - additional space is used for storing the `ans` and `indices` vectors.
+
+
