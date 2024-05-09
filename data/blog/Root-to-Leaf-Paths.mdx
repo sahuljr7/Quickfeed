@@ -165,5 +165,12 @@ This modification doesn't change the time complexity but reduces the space compl
 
 ### Space complexity: 
 
-𝑂(𝐻), where 𝐻 is the height of the binary tree. This is because the space used by the recursion stack is proportional to the height of the tree. Additionally, the space used by the answer vector is proportional to the number of paths in the tree, which can be at most equal to the number of leaf nodes, hence 
-𝑂(𝑁) in the worst case.
+The space complexity of the given code is O(N), where N is the number of nodes in the binary tree. 
+
+1. **Recursion Stack**: The recursion depth can be at most equal to the height of the binary tree. In the worst case scenario, where the tree is skewed (essentially a linked list), the height of the tree will be N, resulting in a recursion depth of N. Each recursive call consumes space on the stack for its local variables, which includes the `temp` vector. Since there can be at most N recursive calls on the stack, the space complexity due to the recursion stack is O(N).
+
+2. **Temporary Vectors**: The `temp` vector is used to store the current path being traversed in the tree. At any given time during the traversal, the size of the `temp` vector can be at most equal to the height of the tree (i.e., O(H)). In the worst case, when the tree is skewed, the height of the tree can be N, so the space complexity due to the `temp` vector is also O(N).
+
+3. **Answer Vector**: The `ans` vector is used to store the paths found in the tree. In the worst case, where every node is a leaf node (i.e., there are N paths), the space complexity due to the `ans` vector will also be O(N).
+
+Combining these factors, the overall space complexity is O(N).
