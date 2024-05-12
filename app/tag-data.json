@@ -1,8 +1,9 @@
   {
         "ai": 3,
         "algorithms": 3,
-        "array": 11,
+        "array": 12,
         "binary tree": 1,
+        "binary search": 1,
         "data structures": 2,
         "dfs": 2,
         "divide and conquer": 3,
@@ -10,8 +11,9 @@
         "geeksforgeeks": 4,
         "graph": 1,
         "greedy algorithm": 1,
+        "heap": 1,
         "hash table": 4,
-        "leetcode": 12,
+        "leetcode": 13,
         "linked list": 1,
         "machine learning": 3,
         "math": 1,
@@ -21,9 +23,9 @@
         "prefix sum": 1,
         "queue": 1,
         "quantum computing": 2,
-        "sorting": 1,
+        "sorting": 2,
         "stack": 2,
         "striver dsa sheet": 1,
         "tree": 2,
-        "two pointers": 2
+        "two pointers": 3
     }
