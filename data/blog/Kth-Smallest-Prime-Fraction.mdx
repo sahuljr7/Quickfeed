@@ -1,0 +1,104 @@
+---
+title: 'Kth Smallest Prime Fraction Leetcode Solution'
+date: '2024-05-10'
+lastmod: '2024-05-10'
+tags: ['array', 'two pointers', 'binary search', 'sorting', 'heap', 'priority queue', 'leetcode']
+draft: false
+summary: You are given a sorted integer array arr containing 1 and prime numbers, where all the integers of arr are unique. You are also given an integer k. For every i and j where 0 <= i < j < arr.length, we consider the fraction arr[i] / arr[j]. Return the kth smallest fraction considered. Return your answer as an array of integers of size 2, where answer[0] == arr[i] and answer[1] == arr[j].
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/k-th-smallest-prime-fraction/)
+
+You are given a sorted integer array arr containing 1 and prime numbers, where all the integers of arr are unique. You are also given an integer k. For every i and j where 0 <= i < j < arr.length, we consider the fraction arr[i] / arr[j]. Return the kth smallest fraction considered. Return your answer as an array of integers of size 2, where answer[0] == arr[i] and answer[1] == arr[j].
+
+<TOCInline toc={props.toc} exclude="Problem Statement" />
+
+## Solution
+
+```cpp
+// Declaration of a class named Solution
+class Solution 
+{ 
+  // Access specifier: public members are accessible from outside the class
+ public: 
+  // Declaration of a function kthSmallestPrimeFraction which takes a vector of integers and an integer as input arguments
+  vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) 
+  { 
+    // Declaration of a constant integer n and assigning it the size of the input vector arr
+    const int n = arr.size(); 
+    // Declaration and initialization of a double variable l with value 0.0
+    double l = 0.0; 
+    // Declaration and initialization of a double variable r with value 1.0
+    double r = 1.0; 
+
+    // Loop until l is less than r
+    while (l < r) 
+    { 
+      // Declaration and initialization of a double variable m as the midpoint between l and r
+      const double m = (l + r) / 2.0; 
+      // Declaration and initialization of an integer variable fractionsNoGreaterThanM with value 0
+      int fractionsNoGreaterThanM = 0; 
+      // Declaration and initialization of an integer variable p with value 0
+      int p = 0; 
+      // Declaration and initialization of an integer variable q with value 1
+      int q = 1; 
+
+      // For each index i, find the first index j such that arr[i] / arr[j] <= m,
+      // so fractionsNoGreaterThanM for index i will be n - j.
+      // Loop through each index i from 0 to n-1
+      for (int i = 0, j = 1; i < n; ++i) 
+      { 
+        // Find the first index j such that arr[i] / arr[j] <= m
+        while (j < n && arr[i] > m * arr[j]) 
+        // Increment j
+          ++j; 
+        // If j reaches the end of the array
+        if (j == n) 
+        // Exit the loop
+          break; 
+        fractionsNoGreaterThanM += n - j; // Increment fractionsNoGreaterThanM by n - j
+        if (p * arr[j] < q * arr[i]) { // If the current fraction is smaller than the previous one
+          p = arr[i]; // Update p
+          q = arr[j]; // Update q
+        }
+      }
+
+      // If fractionsNoGreaterThanM is equal to k
+      if (fractionsNoGreaterThanM == k) 
+      // Return the fraction p/q
+        return {p, q}; 
+      // If fractionsNoGreaterThanM is greater than k
+      if (fractionsNoGreaterThanM > k) 
+         // Update r
+        r = m;
+      // If fractionsNoGreaterThanM is less than k
+      else 
+      // Update l
+        l = m; 
+    }
+
+    // Throw an exception if the loop exits without finding the kth smallest prime fraction
+    throw; 
+  }
+};
+```
+
+### Algorithm steps:
+   - Initialize l to 0 and r to 1.
+   - While l is less than r:
+     - Calculate the midpoint m between l and r.
+     - Initialize fractionsNoGreaterThanM, p, and q.
+     - For each index i from 0 to n-1:
+       - Find the first index j such that arr[i] / arr[j] is less than or equal to m.
+       - Update fractionsNoGreaterThanM and update p and q if necessary.
+     - If fractionsNoGreaterThanM is equal to k, return p and q.
+     - If fractionsNoGreaterThanM is greater than k, update r.
+     - If fractionsNoGreaterThanM is less than k, update l.
+   - If the loop exits without finding the kth smallest prime fraction, throw an exception.
+
+### Time complexity and Space complexity:
+   - Time complexity: O(n log n), where n is the size of the input vector arr. The binary search takes O(log n) time, and for each binary search iteration, it iterates through the array, which takes O(n) time.
+  
+   - Space complexity: O(1), as the algorithm uses only a constant amount of extra space.
+
