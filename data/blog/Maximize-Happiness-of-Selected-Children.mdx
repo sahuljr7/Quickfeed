@@ -1,0 +1,63 @@
+---
+title: 'Maximize Happiness of Selected Children Leetcode Solution'
+date: '2024-05-09'
+lastmod: '2024-05-09'
+tags: ['array', 'sorting', 'greedy', 'leetcode']
+draft: false
+summary: You are given an array happiness of length n, and a positive integer k. There are n children standing in a queue, where the ith child has happiness value happiness[i]. You want to select k children from these n children in k turns. In each turn, when you select a child, the happiness value of all the children that have not been selected till now decreases by 1. Note that the happiness value cannot become negative and gets decremented only if it is positive. Return the maximum sum of the happiness values of the selected children you can achieve by selecting k children.
+---
+
+## Problem Statement
+[LeetCode Question Link](https://leetcode.com/problems/maximize-happiness-of-selected-children/description/)
+
+You are given an array happiness of length n, and a positive integer k. There are n children standing in a queue, where the ith child has happiness value happiness[i]. You want to select k children from these n children in k turns. In each turn, when you select a child, the happiness value of all the children that have not been selected till now decreases by 1. Note that the happiness value cannot become negative and gets decremented only if it is positive. Return the maximum sum of the happiness values of the selected children you can achieve by selecting k children.
+
+<TOCInline toc={props.toc} exclude="Problem Statement" />
+
+## Solution
+
+```cpp
+// Declaration of a class named Solution
+class Solution { 
+  // Access specifier: public members are accessible from outside the class
+ public: 
+ // Declaration of a function maximumHappinessSum which takes a vector of integers and an integer as input arguments
+  long long maximumHappinessSum(vector<int>& happiness, int k) 
+  { 
+    // Declaration and initialization of a long long variable ans with value 0
+    long long ans = 0; 
+    // Declaration and initialization of an integer variable decremented with value 0
+    int decremented = 0; 
+
+  // Sorting the happiness vector in descending order using ranges::sort with a greater<> comparator
+    ranges::sort(happiness, greater<>()); 
+    
+    // Loop from 0 to k-1
+    for (int i = 0; i < k; ++i) 
+    { 
+      // Incrementing ans by the maximum of 0 and (happiness[i] - decremented)
+      ans += max(0, happiness[i] - decremented); 
+       // Incrementing decremented by 1
+      ++decremented;
+    }
+
+  // Returning the value of ans
+    return ans; 
+  }
+};
+```
+
+### Algorithm steps:
+
+   1. Sort the 'happiness' vector in descending order.
+   2. Initialize 'ans' to 0 and 'decremented' to 0.
+   3. Iterate over the first 'k' elements of the sorted 'happiness' vector.
+   4. For each element, add the maximum of 0 and the difference between the element and 'decremented' to 'ans'.
+   5. Increment 'decremented' after processing each element.
+   6. Return 'ans'.
+
+### Time complexity and Space complexity:
+   - Time complexity: Sorting the 'happiness' vector takes O(n log n) time, where n is the size of the vector. The loop iterates 'k' times, so the overall time complexity is O(n log n + k).
+  
+   - Space complexity: The algorithm uses a constant amount of extra space except for the input vector. So, the space complexity is O(n), where n is the size of the input vector.
+
